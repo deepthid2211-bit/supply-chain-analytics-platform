@@ -1,0 +1,66 @@
+version: 2
+
+models:
+  - name: fact_sales
+    description: "Sales transactions fact table with measures and foreign keys"
+    columns:
+      - name: sales_key
+        description: "Primary key (transaction_id)"
+        tests:
+          - unique
+          - not_null
+      - name: product_key
+        description: "Foreign key to dim_products"
+        tests:
+          - not_null
+      - name: store_key
+        description: "Foreign key to dim_stores"
+        tests:
+          - not_null
+      - name: total_revenue
+        description: "Total transaction revenue"
+        tests:
+          - not_null
+      - name: profit
+        description: "Gross profit (revenue - COGS)"
+
+  - name: dim_products
+    description: "Product dimension with categorization and pricing"
+    columns:
+      - name: product_key
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: sku
+        description: "Stock keeping unit (unique)"
+        tests:
+          - unique
+          - not_null
+      - name: category
+        description: "Product category"
+        tests:
+          - not_null
+
+  - name: dim_stores
+    description: "Store location dimension"
+    columns:
+      - name: store_key
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: store_type
+        description: "Store type (Retail, Online, Warehouse)"
+        tests:
+          - accepted_values:
+              values: ['Retail', 'Online', 'Warehouse']
+
+  - name: dim_date
+    description: "Date dimension for time-based analysis"
+    columns:
+      - name: date_key
+        description: "Primary key (YYYYMMDD format)"
+        tests:
+          - unique
+          - not_null

@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: landing
+    database: supply_chain_analytics
+    schema: landing
+    tables:
+      - name: products
+      - name: stores
+      - name: vendors
+      - name: sales
+      - name: inventory_snapshot

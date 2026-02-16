@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Configuration files with credentials
+config/config.yaml
+dbt_project/profiles.yml
+.env
+
+# Data files (don't commit large datasets)
+data/
+*.csv
+*.parquet
+*.json
+
+# ML models (too large for Git)
+ml_model/trained_model.pkl
+ml_model/*.pkl
+ml_model/*.joblib
+
+# Power BI / Tableau cache
+dashboards/*.tmp
+dashboards/~$*.pbix
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# dbt
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/

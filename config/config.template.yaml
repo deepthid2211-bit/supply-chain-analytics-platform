@@ -1,0 +1,36 @@
+# Snowflake Configuration Template
+# Copy this file to config.yaml and fill in your credentials
+# DO NOT commit config.yaml to Git (it's in .gitignore)
+
+snowflake:
+  # Your Snowflake account identifier
+  # Format: <account_locator>.<region_id>
+  # Example: ab12345.us-east-1
+  account: "your_account.region"
+  
+  # Snowflake username
+  user: "YOUR_USERNAME"
+  
+  # Snowflake password
+  password: "YOUR_PASSWORD"
+  
+  # Warehouse to use for compute
+  warehouse: "COMPUTE_WH"
+  
+  # Database name
+  database: "VULNERABILITY_ANALYTICS"
+  
+  # Default schema
+  schema: "LANDING"
+  
+  # Role (optional, defaults to user's default role)
+  role: "ACCOUNTADMIN"
+
+# NIST NVD API (optional)
+nist:
+  # Get a free API key for higher rate limits: https://nvd.nist.gov/developers/request-an-api-key
+  api_key: ""  # Leave empty for public access (rate limited)
+
+# dbt Configuration
+# This is handled in dbt_project/profiles.yml
+# See dbt_project/profiles.yml.template for dbt-specific config
