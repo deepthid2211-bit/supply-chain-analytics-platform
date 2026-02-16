@@ -74,18 +74,39 @@ with st.sidebar:
                 except Exception as e:
                     st.error(f"❌ Connection failed: {str(e)}")
     
-    # OpenAI API Key
+    # AI Configuration
     with st.expander("🤖 AI Configuration", expanded=False):
-        api_key = st.text_input("OpenAI API Key", type="password", value=os.getenv("OPENAI_API_KEY", ""))
-        if api_key:
-            os.environ["OPENAI_API_KEY"] = api_key
-            st.session_state.api_key = api_key
+        st.markdown("**Choose your LLM provider:**")
         
-        use_groq = st.checkbox("Use Groq (Free, Faster)", value=True)
-        if use_groq:
-            groq_key = st.text_input("Groq API Key", type="password", value=os.getenv("GROQ_API_KEY", ""))
-            if groq_key:
-                os.environ["GROQ_API_KEY"] = groq_key
+        # Claude (Anthropic) - RECOMMENDED
+        anthropic_key = st.text_input("Anthropic API Key (Claude - Recommended for SQL)", 
+                                      type="password", 
+                                      value=os.getenv("ANTHROPIC_API_KEY", ""))
+        if anthropic_key:
+            os.environ["ANTHROPIC_API_KEY"] = anthropic_key
+            st.success("✅ Claude configured")
+        
+        st.divider()
+        
+        # Groq (Free alternative)
+        groq_key = st.text_input("Groq API Key (Free alternative)", 
+                                 type="password", 
+                                 value=os.getenv("GROQ_API_KEY", ""))
+        if groq_key:
+            os.environ["GROQ_API_KEY"] = groq_key
+            st.success("✅ Groq configured")
+        
+        st.divider()
+        
+        # OpenAI (for embeddings, required)
+        openai_key = st.text_input("OpenAI API Key (Required for embeddings)", 
+                                   type="password", 
+                                   value=os.getenv("OPENAI_API_KEY", ""))
+        if openai_key:
+            os.environ["OPENAI_API_KEY"] = openai_key
+            st.session_state.api_key = openai_key
+        
+        st.info("💡 **Tip**: Claude is best for SQL generation, but you still need OpenAI for embeddings.")
     
     st.divider()
     
@@ -109,10 +130,23 @@ st.title("📊 Supply Chain Analytics Chatbot")
 st.markdown("Ask me anything about your supply chain data! I can analyze sales, inventory, products, and more.")
 
 # Connection status indicator
-if st.session_state.snowflake_connected:
-    st.success("🟢 Connected to Snowflake")
-else:
-    st.warning("🟡 Not connected to Snowflake. Configure credentials in sidebar.")
+col1, col2 = st.columns([1, 1])
+with col1:
+    if st.session_state.snowflake_connected:
+        st.success("🟢 Connected to Snowflake")
+    else:
+        st.warning("🟡 Not connected to Snowflake")
+
+with col2:
+    # Show active LLM provider
+    if os.getenv("ANTHROPIC_API_KEY"):
+        st.success("🤖 LLM: Claude (Anthropic)")
+    elif os.getenv("GROQ_API_KEY"):
+        st.info("🤖 LLM: Groq (Mixtral)")
+    elif os.getenv("OPENAI_API_KEY"):
+        st.info("🤖 LLM: OpenAI (GPT-3.5)")
+    else:
+        st.warning("🤖 No LLM configured")
 
 # Chat interface
 chat_container = st.container()

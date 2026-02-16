@@ -6,6 +6,7 @@ import os
 from typing import Dict, Any, Optional
 import pandas as pd
 from langchain.chat_models import ChatOpenAI
+from langchain_anthropic import ChatAnthropic
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 
@@ -18,8 +19,16 @@ class QueryRouter:
         self.sf_connector = snowflake_connector
         self.rag_engine = rag_engine
         
-        # Initialize LLM (OpenAI or Groq)
-        if os.getenv("GROQ_API_KEY"):
+        # Initialize LLM - Priority: Claude > Groq > OpenAI
+        if os.getenv("ANTHROPIC_API_KEY"):
+            # Use Claude (excellent for SQL generation!)
+            self.llm = ChatAnthropic(
+                model="claude-3-5-sonnet-20241022",
+                temperature=0,
+                anthropic_api_key=os.getenv("ANTHROPIC_API_KEY")
+            )
+            self.llm_provider = "Claude"
+        elif os.getenv("GROQ_API_KEY"):
             # Use Groq for faster, free inference
             self.llm = ChatOpenAI(
                 model="mixtral-8x7b-32768",
@@ -27,8 +36,10 @@ class QueryRouter:
                 api_key=os.getenv("GROQ_API_KEY"),
                 base_url="https://api.groq.com/openai/v1"
             )
+            self.llm_provider = "Groq"
         else:
             self.llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo")
+            self.llm_provider = "OpenAI"
         
         # Get schema information
         self.schema_info = self.sf_connector.get_schema_info()
