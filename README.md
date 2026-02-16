@@ -61,6 +61,43 @@ Demand Forecast   Executive      Supply Chain
 
 ---
 
+## 🤖 NEW: Interactive RAG Chatbot
+
+**Ask questions about your supply chain data in natural language!**
+
+```
+User: "What were the top 5 products by revenue last quarter?"
+AI: "Found 5 results. The total TOTAL_AMOUNT is $2,431,567.89.
+     Here are all the results:
+     • Product X: $589,234.12
+     • Product Y: $523,891.45
+     ..."
+```
+
+### Features
+✅ **Natural Language Queries** - Ask questions in plain English  
+✅ **Automatic SQL Generation** - Converts questions to optimized SQL  
+✅ **RAG-Powered Context** - Retrieves relevant business context using FAISS vector search  
+✅ **Interactive Visualizations** - Auto-generates charts from query results  
+✅ **Real-Time Snowflake Integration** - Live data from your data warehouse  
+✅ **Multiple LLM Support** - OpenAI GPT-3.5 or Groq Mixtral (free, faster)  
+
+### Try It Live
+🔗 **[Launch Chatbot Demo](https://your-app.streamlit.app)** _(Deploy instructions in `chatbot/DEPLOYMENT.md`)_
+
+### Tech Stack
+- **Frontend**: Streamlit
+- **LLM Framework**: LangChain
+- **Vector Store**: FAISS
+- **Embeddings**: OpenAI ada-002
+- **LLM**: GPT-3.5 / Groq Mixtral
+- **Database**: Snowflake
+
+📚 **Full Documentation**: [`chatbot/README.md`](chatbot/README.md)  
+🚀 **Deployment Guide**: [`chatbot/DEPLOYMENT.md`](chatbot/DEPLOYMENT.md)  
+
+---
+
 ## 📊 Interactive Dashboards
 
 Professional data visualizations built with Python (matplotlib/seaborn) from live Snowflake data.

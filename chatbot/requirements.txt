@@ -1,0 +1,10 @@
+streamlit==1.31.0
+langchain==0.1.9
+langchain-community==0.0.24
+openai==1.12.0
+snowflake-connector-python==3.7.0
+faiss-cpu==1.7.4
+python-dotenv==1.0.1
+pandas==2.2.0
+plotly==5.18.0
+tiktoken==0.6.0
