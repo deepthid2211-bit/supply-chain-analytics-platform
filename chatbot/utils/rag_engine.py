@@ -4,10 +4,10 @@ RAG (Retrieval Augmented Generation) engine for document retrieval
 
 import os
 from typing import List, Dict
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.docstore.document import Document
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_core.documents import Document
 
 
 class RAGEngine:
@@ -16,7 +16,15 @@ class RAGEngine:
     def __init__(self, knowledge_base_path: str = "data/knowledge_base"):
         """Initialize RAG engine with knowledge base"""
         self.knowledge_base_path = knowledge_base_path
-        self.embeddings = OpenAIEmbeddings()
+        
+        # Use HuggingFace embeddings (FREE, no API key needed!)
+        # This model is small, fast, and good quality
+        self.embeddings = HuggingFaceEmbeddings(
+            model_name="sentence-transformers/all-MiniLM-L6-v2",
+            model_kwargs={'device': 'cpu'},
+            encode_kwargs={'normalize_embeddings': True}
+        )
+        
         self.vector_store = None
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=1000,

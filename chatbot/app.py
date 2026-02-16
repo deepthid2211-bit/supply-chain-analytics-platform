@@ -76,10 +76,10 @@ with st.sidebar:
     
     # AI Configuration
     with st.expander("🤖 AI Configuration", expanded=False):
-        st.markdown("**Choose your LLM provider:**")
+        st.markdown("**LLM Configuration:**")
         
         # Claude (Anthropic) - RECOMMENDED
-        anthropic_key = st.text_input("Anthropic API Key (Claude - Recommended for SQL)", 
+        anthropic_key = st.text_input("Anthropic API Key (Claude - Best for SQL)", 
                                       type="password", 
                                       value=os.getenv("ANTHROPIC_API_KEY", ""))
         if anthropic_key:
@@ -98,15 +98,7 @@ with st.sidebar:
         
         st.divider()
         
-        # OpenAI (for embeddings, required)
-        openai_key = st.text_input("OpenAI API Key (Required for embeddings)", 
-                                   type="password", 
-                                   value=os.getenv("OPENAI_API_KEY", ""))
-        if openai_key:
-            os.environ["OPENAI_API_KEY"] = openai_key
-            st.session_state.api_key = openai_key
-        
-        st.info("💡 **Tip**: Claude is best for SQL generation, but you still need OpenAI for embeddings.")
+        st.info("💡 **Embeddings**: Using FREE HuggingFace (sentence-transformers). No API key needed!")
     
     st.divider()
     
@@ -130,23 +122,26 @@ st.title("📊 Supply Chain Analytics Chatbot")
 st.markdown("Ask me anything about your supply chain data! I can analyze sales, inventory, products, and more.")
 
 # Connection status indicator
-col1, col2 = st.columns([1, 1])
+col1, col2, col3 = st.columns([1, 1, 1])
 with col1:
     if st.session_state.snowflake_connected:
-        st.success("🟢 Connected to Snowflake")
+        st.success("🟢 Snowflake: Connected")
     else:
-        st.warning("🟡 Not connected to Snowflake")
+        st.warning("🟡 Snowflake: Not connected")
 
 with col2:
     # Show active LLM provider
     if os.getenv("ANTHROPIC_API_KEY"):
-        st.success("🤖 LLM: Claude (Anthropic)")
+        st.success("🤖 LLM: Claude 3.5")
     elif os.getenv("GROQ_API_KEY"):
-        st.info("🤖 LLM: Groq (Mixtral)")
+        st.info("🤖 LLM: Groq Mixtral")
     elif os.getenv("OPENAI_API_KEY"):
-        st.info("🤖 LLM: OpenAI (GPT-3.5)")
+        st.info("🤖 LLM: OpenAI GPT-3.5")
     else:
-        st.warning("🤖 No LLM configured")
+        st.warning("🤖 LLM: Not configured")
+
+with col3:
+    st.success("🧠 Embeddings: HuggingFace (Free)")
 
 # Chat interface
 chat_container = st.container()

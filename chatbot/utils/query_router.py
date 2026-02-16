@@ -5,10 +5,10 @@ Query router to intelligently route questions to SQL generation or RAG retrieval
 import os
 from typing import Dict, Any, Optional
 import pandas as pd
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
-from langchain.prompts import ChatPromptTemplate
-from langchain.schema.output_parser import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 
 
 class QueryRouter:
@@ -21,13 +21,13 @@ class QueryRouter:
         
         # Initialize LLM - Priority: Claude > Groq > OpenAI
         if os.getenv("ANTHROPIC_API_KEY"):
-            # Use Claude (excellent for SQL generation!)
+            # Use Claude 3 Haiku (fastest, available on all API key tiers)
             self.llm = ChatAnthropic(
-                model="claude-3-5-sonnet-20241022",
+                model="claude-3-haiku-20240307",  # Claude 3 Haiku - works with all API keys
                 temperature=0,
                 anthropic_api_key=os.getenv("ANTHROPIC_API_KEY")
             )
-            self.llm_provider = "Claude"
+            self.llm_provider = "Claude 3 Haiku"
         elif os.getenv("GROQ_API_KEY"):
             # Use Groq for faster, free inference
             self.llm = ChatOpenAI(
