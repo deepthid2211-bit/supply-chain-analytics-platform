@@ -17,6 +17,7 @@ dbt-snowflake==1.7.2
 # Machine Learning
 scikit-learn==1.4.0
 joblib==1.3.2
+prophet==1.1.5  # Optional: for advanced time series forecasting
 
 # Configuration
 PyYAML==6.0.1
