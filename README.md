@@ -61,6 +61,45 @@ Demand Forecast   Executive      Supply Chain
 
 ---
 
+## 📊 Interactive Dashboards
+
+Professional data visualizations built with Python (matplotlib/seaborn) from live Snowflake data.
+
+### Executive KPIs
+![Executive Dashboard](dashboards/screenshots/01_executive_kpis.png)
+
+**Key Metrics:**
+- Total Revenue: $12,163,165
+- Total Profit: $5,840,939 (48% margin)
+- 18,226 transactions | $667 avg transaction value
+
+### Revenue Trend Analysis
+![Revenue Trend](dashboards/screenshots/02_revenue_trend.png)
+
+**Insights:** Multi-category revenue trends showing seasonal patterns and growth trajectories across product lines.
+
+### Category Performance
+![Category Performance](dashboards/screenshots/03_category_performance.png)
+
+**Analysis:** Revenue and profit breakdown by product category, identifying top performers and margin opportunities.
+
+### Top Products
+![Top Products](dashboards/screenshots/04_top_products.png)
+
+**Top 10 products** driving 40%+ of total revenue, color-coded by category.
+
+### Store & Regional Performance
+![Store Performance](dashboards/screenshots/05_store_performance.png)
+
+**Breakdown:** Performance analysis by store type (Retail, Online, Warehouse) and regional distribution.
+
+### Profit Analysis
+![Profit Analysis](dashboards/screenshots/06_profit_analysis.png)
+
+**Advanced analytics:** Profit margin vs revenue scatter plot revealing high-performing product subcategories.
+
+---
+
 ## 🛠️ Tech Stack
 
 | Layer | Technology | Purpose |
