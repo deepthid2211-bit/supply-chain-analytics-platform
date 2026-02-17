@@ -19,11 +19,12 @@ class QueryRouter:
         self.sf_connector = snowflake_connector
         self.rag_engine = rag_engine
         
-        # Initialize LLM - Priority: Claude > Groq > OpenAI
+        # Initialize LLM - Priority: Claude Haiku > Groq > OpenAI
         if os.getenv("ANTHROPIC_API_KEY"):
-            # Use Claude 3 Haiku (fastest, available on all API key tiers)
+            # Use Claude 3 Haiku - CHEAPEST Claude model ($0.25 per million input tokens)
+            # This is 60x cheaper than Claude 3.5 Sonnet ($15 per million)!
             self.llm = ChatAnthropic(
-                model="claude-3-haiku-20240307",  # Claude 3 Haiku - works with all API keys
+                model="claude-3-haiku-20240307",  # ✅ Haiku (cheap!) not Sonnet (expensive!)
                 temperature=0,
                 anthropic_api_key=os.getenv("ANTHROPIC_API_KEY")
             )

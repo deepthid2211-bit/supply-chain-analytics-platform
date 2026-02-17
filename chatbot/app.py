@@ -132,9 +132,9 @@ with col1:
 with col2:
     # Show active LLM provider
     if os.getenv("ANTHROPIC_API_KEY"):
-        st.success("🤖 LLM: Claude 3.5")
+        st.success("🤖 LLM: Claude 3 Haiku ($0.25/M tokens)")
     elif os.getenv("GROQ_API_KEY"):
-        st.info("🤖 LLM: Groq Mixtral")
+        st.info("🤖 LLM: Groq Mixtral (FREE)")
     elif os.getenv("OPENAI_API_KEY"):
         st.info("🤖 LLM: OpenAI GPT-3.5")
     else:
