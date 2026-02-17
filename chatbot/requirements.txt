@@ -9,8 +9,8 @@ langchain-anthropic==0.1.4
 snowflake-connector-python==3.7.0
 faiss-cpu>=1.7.4
 python-dotenv==1.0.1
-pandas==2.2.0
+pandas>=2.2.0
 plotly==5.18.0
-torch==2.2.0
-transformers==4.44.0
-sentence-transformers==3.0.1
+torch>=2.2.0
+transformers>=4.44.0
+sentence-transformers>=3.0.1
