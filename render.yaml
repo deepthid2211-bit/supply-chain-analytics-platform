@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: supply-chain-chatbot
+    env: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: pip install -r chatbot/requirements.txt
+    startCommand: streamlit run chatbot/app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: SNOWFLAKE_ACCOUNT
+        sync: false
+      - key: SNOWFLAKE_USER
+        sync: false
+      - key: SNOWFLAKE_PASSWORD
+        sync: false
+      - key: SNOWFLAKE_DATABASE
+        sync: false
+      - key: SNOWFLAKE_SCHEMA
+        sync: false
+      - key: SNOWFLAKE_WAREHOUSE
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
