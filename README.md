@@ -1,3 +1,5 @@
+> **Impact:** Designed an enterprise-grade supply chain analytics platform processing 500K+ transactions across 1,000+ SKUs and 50+ stores. Built a 3-layer Snowflake warehouse with star schema (3 fact + 5 dimension tables), 15+ dbt transformation models, ML demand forecasting achieving <15% MAPE, stockout risk prediction at ~85% precision, and a RAG-powered chatbot for natural language analytics — all served through Power BI executive dashboards.
+
 # 📦 Supply Chain Analytics Platform
 
 **An end-to-end analytics engineering project demonstrating enterprise supply chain data warehousing and demand forecasting**
